@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -Wall -Wextra -std=c11 -O0 -m32
+CFLAGS := -Wall -Wextra -std=c11 -O0 
 
 BINS := count-words base addresses menu_map
 
