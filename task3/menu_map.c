@@ -188,6 +188,12 @@ int main(int argc, char **argv) {
         free(data_array);
         // And update our main pointer to point to the *new* data
         data_array = new_data_array;
+        // --- 3f: Input Buffer clear (Fix) ---
+        // If we just ran "Get string", we must clear the leftover '\n'
+        if (menu_choice == 0) {
+            int c;
+            while ((c = fgetc(stdin)) != '\n' && c != EOF);
+        }
 
         printf("DONE.\n\n");
 

@@ -1,30 +1,21 @@
+# Compiler
 CC := gcc
-CFLAGS := -Wall -Wextra -std=c11 -O0 
 
-BINS := count-words base addresses menu_map
+# Compiler flags (same as before, but without -m32 for Windows)
+CFLAGS := -Wall -Wextra -std=c11 -O0 -g
 
-all: $(BINS)
+# Our single target program
+TARGET := menu_map
 
-count-words: count-words.o
-	$(CC) $(CFLAGS) $^ -o $@
+# The default rule
+all: $(TARGET)
 
-base: base.o
-	$(CC) $(CFLAGS) $^ -o $@
+# Rule to build the target
+$(TARGET): $(TARGET).c
+	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c
 
-addresses: addresses.o
-	$(CC) $(CFLAGS) $^ -o $@
-
-menu_map: menu_map.o
-	$(CC) $(CFLAGS) $^ -o $@
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-run-%: %
-	./$<
-
+# Rule to clean up
 clean:
-	rm -f *.o $(BINS)
+	rm -f *.o $(TARGET) $(TARGET).exe
 
-.PHONY: all clean run-%
-
+.PHONY: all clean
